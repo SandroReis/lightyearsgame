@@ -8,7 +8,7 @@ namespace ly
 	class Application
 	{
 	public:
-		Application();
+		Application(unsigned int windowWidth, unsigned windowHeigth, const std::string& title, sf::Uint32 style);
 		void Run();
 
 		template<typename WordType>
