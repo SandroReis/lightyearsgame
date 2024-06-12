@@ -1,6 +1,7 @@
 #include "framework/Application.h"
 #include "framework/Core.h"
 #include "framework/World.h"
+#include "framework/AssetManager.h"
 
 namespace ly
 {
@@ -8,7 +9,9 @@ namespace ly
 		: mWindow{ sf::VideoMode(windowWidth,windowHeigth), title, style },
 		mTargetFramerate{ 60.f },
 		mTickClock{},
-		currentWorld{ nullptr }
+		currentWorld{ nullptr },
+		mCleanCycleClock{},
+		mCleanCycleIterval{2.f}
 	{
 	}
 
@@ -36,7 +39,13 @@ namespace ly
 				TickInternal(targetDeltaTime);
 				RenderInternal();
 			}
+
+
 		}
+	}
+	sf::Vector2u Application::GetWindowSize() const
+	{
+		return mWindow.getSize();
 	}
 	void Application::TickInternal(float deltaTime)
 	{
@@ -45,6 +54,12 @@ namespace ly
 		if (currentWorld)
 		{
 			currentWorld->TickInternal(deltaTime);
+		}
+
+		if (mCleanCycleClock.getElapsedTime().asSeconds() > mCleanCycleIterval)
+		{
+			mCleanCycleClock.restart();
+			AssetManager::Get().CleanCycle();
 		}
 	}
 	void Application::RenderInternal()
@@ -58,13 +73,10 @@ namespace ly
 	}
 	void Application::Render()
 	{
-		sf::CircleShape rect{ 50 };
-		rect.setFillColor(sf::Color::Green);
-		rect.setOrigin(50, 50);
-
-		rect.setPosition(mWindow.getSize().x / 2.f, mWindow.getSize().y / 2.f);
-
-		mWindow.draw(rect);
+		if (currentWorld)
+		{
+			currentWorld->Render(mWindow);
+		}
 	}
 	void Application::Tick(float deltaTime)
 	{

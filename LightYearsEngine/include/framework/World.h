@@ -1,5 +1,6 @@
 #pragma once
 #include "framework/Core.h"
+#include <SFML/Graphics.hpp>
 
 namespace ly
 {
@@ -13,12 +14,14 @@ namespace ly
 
 		void BeginPlayInternal();
 		void TickInternal(float deltaTime);
+		void Render(sf::RenderWindow& window);
 
 		virtual ~World();
 
 		template<typename ActorType>
 		weak<ActorType> SpawnActor();
 		
+		sf::Vector2u GetWindowSize() const;
 
 	private:
 		void BeginPlay();

@@ -1,6 +1,7 @@
 #include "framework/World.h"
 #include "framework/Core.h"
 #include "framework/Actor.h"
+#include "framework/Application.h"
 
 namespace ly
 {
@@ -39,7 +40,7 @@ namespace ly
 			}
 			else 
 			{
-				iter->get()->Tick(deltaTime);
+				iter->get()->TickInternal(deltaTime);
 				++iter;
 			}
 		}
@@ -48,18 +49,31 @@ namespace ly
 		Tick(deltaTime);
 	}
 
+	void World::Render(sf::RenderWindow& window)
+	{
+		for (auto& actor : mActors)
+		{
+			actor->Render(window);
+		}
+	}
+
 	World::~World()
 	{
 	}
 
+	sf::Vector2u World::GetWindowSize() const
+	{
+		return mOwningApp->GetWindowSize();
+	}
+
 	void World::BeginPlay()
 	{
-		LOG("began play");
+		
 	}
 
 	void World::Tick(float deltaTime)
 	{
-		LOG("Ticking at framerate %f", 1.f / deltaTime);
+		
 	}
 
 }

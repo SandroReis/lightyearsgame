@@ -14,7 +14,7 @@ namespace ly
 		template<typename WordType>
 		weak<WordType> LoadWorld();
 
-
+		sf::Vector2u GetWindowSize() const;
 	private:
 		void TickInternal(float deltaTime);
 		void RenderInternal();
@@ -27,6 +27,8 @@ namespace ly
 		sf::Clock mTickClock;
 
 		shared<World> currentWorld;
+		sf::Clock mCleanCycleClock;
+		float mCleanCycleIterval;
 	};
 
 	template<typename WorldType>
