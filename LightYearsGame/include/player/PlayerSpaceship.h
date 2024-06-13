@@ -1,8 +1,10 @@
 #pragma once
 #include "spaceship/Spaceship.h"
 
+
 namespace ly
 {
+	class BulletShooter;
 	class PlayerSpaceship : public Spaceship
 	{
 	public:
@@ -10,6 +12,7 @@ namespace ly
 
 		virtual void Tick(float deltatime) override;
 		void SetSpeed(float newSpeed) { mSpeed = newSpeed; };
+		virtual void Shoot() override;
 		float GetSpeed() { return mSpeed; };
 	private:
 		void NormalizeInput();
@@ -18,5 +21,7 @@ namespace ly
 		void ConsumeInput(float deltatime);
 		sf::Vector2f mMoveInput;
 		float mSpeed;
+
+		unique<BulletShooter> mShooter;
 	};
 }
