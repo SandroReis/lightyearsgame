@@ -1,17 +1,17 @@
+#include "framework/MathUtility.h"
 #include "player/PlayerSpaceship.h"
 #include "SFML/System.hpp"
-#include "framework/MathUtility.h"
 #include "weapon/BulletShooter.h"
 
 namespace ly
 {
 	PlayerSpaceship::PlayerSpaceship(World* owningWorld, const std::string& path)
-		: Spaceship{owningWorld, path},
+		: Spaceship{ owningWorld, path },
 		mMoveInput{},
-		mSpeed{200.f},
+		mSpeed{ 200.f },
 		mShooter{ new BulletShooter {this, 0.1f} }
 	{
-
+		SetTeamId(1);
 	}
 	void PlayerSpaceship::Tick(float deltatime)
 	{
@@ -62,7 +62,7 @@ namespace ly
 		{
 			mMoveInput.y = 1.f;
 		}
-		
+
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		{
 			mMoveInput.x = -1.f;
@@ -71,7 +71,7 @@ namespace ly
 		{
 			mMoveInput.x = 1.f;
 		}
-		
+
 		ClampInputOnEdge();
 		NormalizeInput();
 
@@ -79,7 +79,7 @@ namespace ly
 		{
 			Shoot();
 		}
-		
+
 	}
 	void PlayerSpaceship::ConsumeInput(float deltatime)
 	{

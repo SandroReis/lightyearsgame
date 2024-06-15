@@ -1,16 +1,22 @@
+#include <box2d/b2_body.h>
+
 #include "framework/Actor.h"
-#include "framework/Core.h"
 #include "framework/AssetManager.h"
+#include "framework/Core.h"
 #include "framework/MathUtility.h"
+#include "framework/PhysicsSystem.h"
 #include "framework/World.h"
 
 namespace ly
 {
 	Actor::Actor(World* owningWorld, const std::string& texturePath)
 		: mOwningWorld{ owningWorld },
-		mHasBeganlay{false},
+		mHasBeganlay{ false },
 		mSprite{},
-		mTexture{}
+		mTexture{},
+		mPhysicsBody{ nullptr },
+		mPhysicsEnabled{ false },
+		mTeamID{ 255 }
 	{
 		SetTexture(texturePath);
 	}
@@ -27,6 +33,7 @@ namespace ly
 			BeginPlay();
 		}
 	}
+
 	void Actor::TickInternal(float deltatime)
 	{
 		if (!IsPendingDestroy())
@@ -36,11 +43,11 @@ namespace ly
 	}
 	void Actor::BeginPlay()
 	{
-		
+
 	}
 	void Actor::Tick(float deltaTime)
 	{
-		
+
 
 	}
 	void Actor::SetTexture(const std::string& texturePath)
@@ -66,10 +73,12 @@ namespace ly
 	void Actor::SetActorLocation(const sf::Vector2f& newLoc)
 	{
 		mSprite.setPosition(newLoc);
+		UpdatePhysicsBodyTransform();
 	}
 	void Actor::SetActorRotation(float newRot)
 	{
 		mSprite.setRotation(newRot);
+		UpdatePhysicsBodyTransform();
 	}
 	void Actor::AddActorLocationOffset(const sf::Vector2f& offsetAmt)
 	{
@@ -142,6 +151,70 @@ namespace ly
 		return false;
 
 
+	}
+	void Actor::SetEnablePhysics(bool enable)
+	{
+		mPhysicsEnabled = enable;
+		if (mPhysicsEnabled)
+		{
+			InitializePhysics();
+		}
+		else
+		{
+			UnitializePhysics();
+		}
+	}
+	bool Actor::IsOtherHostile(Actor* other) const
+	{
+		if (GetTeamId() == GetNeutralTeamId() || other->GetTeamId() == GetNeutralTeamId())
+		{
+			return false;
+		}
+
+		return GetTeamId() != other->GetTeamId();
+	}
+	void Actor::ApplyDamage(float amt)
+	{
+	}
+	void Actor::InitializePhysics()
+	{
+
+		if (!mPhysicsBody)
+		{
+			mPhysicsBody = PhysicsSystem::Get().AddListener(this);
+		}
+	}
+	void Actor::UnitializePhysics()
+	{
+		if (mPhysicsBody) {
+			PhysicsSystem::Get().RemoveListener(mPhysicsBody);
+			mPhysicsBody = nullptr;
+		}
+
+	}
+	void Actor::UpdatePhysicsBodyTransform()
+	{
+		if (mPhysicsBody)
+		{
+			float physicsScale = PhysicsSystem::Get().GetPhysicsScale();
+			b2Vec2 pos{ GetActorLocation().x * physicsScale, GetActorLocation().y * physicsScale };
+			float rotation = DegreesToRadians(GetActorRotation());
+
+			mPhysicsBody->SetTransform(pos, rotation);
+		}
+	}
+
+
+	void Actor::OnActorBeginOverlap(Actor* other)
+	{
+	}
+	void Actor::OnActorEndOverlap(Actor* other)
+	{
+	}
+	void Actor::Destroy()
+	{
+		UnitializePhysics();
+		Object::Destroy();
 	}
 }
 

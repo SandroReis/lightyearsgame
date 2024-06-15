@@ -13,7 +13,9 @@ namespace ly
 		void SetDamage(float newDamage);
 
 		virtual void Tick(float deltaTime) override;
-
+		virtual void BeginPlay() override;
+		virtual void OnActorBeginOverlap(Actor* other) override;
+		float GetDamage() const { return mDamage; };
 	private:
 		void Move(float deltaTime);
 		Actor* mOwner;

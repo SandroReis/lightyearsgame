@@ -1,9 +1,9 @@
-#include "gameFramework/GameApplication.h"
-#include "framework/World.h"
+#include "config.h"
 #include "framework/Actor.h"
 #include "framework/AssetManager.h"
+#include "framework/World.h"
+#include "gameFramework/GameApplication.h"
 #include "player/PlayerSpaceship.h"
-#include "config.h"
 
 ly::Application* GetApplication()
 {
@@ -13,19 +13,29 @@ ly::Application* GetApplication()
 namespace ly
 {
 	GameApplication::GameApplication()
-		: Application{600,980, "LightYears", sf::Style::Titlebar | sf::Style::Close}
+		: Application{ 600,980, "LightYears", sf::Style::Titlebar | sf::Style::Close }
 	{
 		AssetManager::Get().SetAssetRootDirectory(GetResourceDir());
 		weak<World> newWorld = LoadWorld<World>();
-		newWorld.lock()->SpawnActor<Actor>();
 		testPlayerSpaceship = newWorld.lock()->SpawnActor<PlayerSpaceship>();
-
 		testPlayerSpaceship.lock()->SetActorLocation(sf::Vector2f(300, 490.f));
 		testPlayerSpaceship.lock()->SetActorRotation(-90.f);
 
+		weak<Spaceship> testSpaceShip = newWorld.lock()->SpawnActor<Spaceship>();
+		testSpaceShip.lock()->SetTexture("SpaceShooterRedux/PNG/playerShip2_orange.png");
+		testSpaceShip.lock()->SetActorLocation(sf::Vector2f{ 100.f, 50.f });
+		testSpaceShip.lock()->SetTeamId(2);
+		//counter = 0.f;
 	}
 	void GameApplication::Tick(float deltatime)
 	{
-		
+		//counter += deltatime;
+		//if (counter > 10.f)
+		//{
+		//	if (!testPlayerSpaceship.expired())
+		//	{
+		//		testPlayerSpaceship.lock()->Destroy();
+		//	}
+		//}
 	}
 }

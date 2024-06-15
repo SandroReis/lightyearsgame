@@ -1,8 +1,11 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
-#include "framework/Object.h"
 #include "framework/Core.h"
+#include "framework/Object.h"
+
+class b2Body;
+
 
 namespace ly
 {
@@ -34,13 +37,34 @@ namespace ly
 		World* GetWorld() const { return mOwningWorld; };
 
 		bool IsActorOutOfWindowBounds() const;
+		void SetEnablePhysics(bool enable);
 
+		virtual void OnActorBeginOverlap(Actor* other);
+		virtual void OnActorEndOverlap(Actor* other);
+		virtual void Destroy() override;
+		static uint8 GetNeutralTeamId() { return neutralTeamID; };
+
+		void SetTeamId(uint8 teamID) { mTeamID = teamID; };
+		uint8 GetTeamId() const { return mTeamID; };
+		bool IsOtherHostile(Actor* other) const;
+
+		virtual void ApplyDamage(float amt);
 	private:
+		void InitializePhysics();
+		void UnitializePhysics();
+		void UpdatePhysicsBodyTransform();
+
 		void CenterPivot();
 		World* mOwningWorld;
 		bool mHasBeganlay;
 
 		sf::Sprite mSprite;
 		shared<sf::Texture> mTexture;
+
+		b2Body* mPhysicsBody;
+		bool mPhysicsEnabled;
+		uint8 mTeamID;
+
+		const static uint8 neutralTeamID = 255;
 	};
 }

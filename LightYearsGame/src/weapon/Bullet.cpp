@@ -3,11 +3,12 @@
 namespace ly
 {
 	Bullet::Bullet(World* world, Actor* owner, const std::string& texturePath, float speed, float damage)
-		: Actor{world, texturePath},
-		mOwner{owner},
-		mSpeed{speed},
-		mDamage{damage}
+		: Actor{ world, texturePath },
+		mOwner{ owner },
+		mSpeed{ speed },
+		mDamage{ damage }
 	{
+		SetTeamId(owner->GetTeamId());
 	}
 	void Bullet::SetSpeed(float newSpeed)
 	{
@@ -23,6 +24,19 @@ namespace ly
 		Move(deltaTime);
 		if (IsActorOutOfWindowBounds())
 		{
+			Destroy();
+		}
+	}
+	void Bullet::BeginPlay()
+	{
+		Actor::BeginPlay();
+		SetEnablePhysics(true);
+	}
+	void Bullet::OnActorBeginOverlap(Actor* other)
+	{
+		if (IsOtherHostile(other))
+		{
+			other->ApplyDamage(GetDamage());
 			Destroy();
 		}
 	}
