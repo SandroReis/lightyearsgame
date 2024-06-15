@@ -34,7 +34,9 @@ namespace ly
 
 		sf::Vector2u GetWindowSize() const;
 
-		World* GetWorld() const { return mOwningWorld; };
+		World* GetWorld() { return mOwningWorld; };
+		const World* GetWorld() const { return mOwningWorld; };
+
 
 		bool IsActorOutOfWindowBounds() const;
 		void SetEnablePhysics(bool enable);
@@ -47,6 +49,9 @@ namespace ly
 		void SetTeamId(uint8 teamID) { mTeamID = teamID; };
 		uint8 GetTeamId() const { return mTeamID; };
 		bool IsOtherHostile(Actor* other) const;
+
+		sf::Sprite& GetSprite() { return mSprite; };
+		const sf::Sprite& GetSprite() const { return mSprite; };
 
 		virtual void ApplyDamage(float amt);
 	private:

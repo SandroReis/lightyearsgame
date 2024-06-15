@@ -22,7 +22,7 @@ namespace ly
 		testPlayerSpaceship.lock()->SetActorRotation(-90.f);
 
 		weak<Spaceship> testSpaceShip = newWorld.lock()->SpawnActor<Spaceship>();
-		testSpaceShip.lock()->SetTexture("SpaceShooterRedux/PNG/playerShip2_orange.png");
+		testSpaceShip.lock()->SetTexture("SpaceShooterRedux/PNG/playerShip1_blue.png");
 		testSpaceShip.lock()->SetActorLocation(sf::Vector2f{ 100.f, 50.f });
 		testSpaceShip.lock()->SetTeamId(2);
 		//counter = 0.f;
