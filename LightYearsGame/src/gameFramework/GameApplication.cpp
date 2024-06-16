@@ -1,4 +1,5 @@
 #include "config.h"
+#include "Enemy/Vanguard.h"
 #include "framework/Actor.h"
 #include "framework/AssetManager.h"
 #include "framework/World.h"
@@ -21,10 +22,8 @@ namespace ly
 		testPlayerSpaceship.lock()->SetActorLocation(sf::Vector2f(300, 490.f));
 		testPlayerSpaceship.lock()->SetActorRotation(-90.f);
 
-		weak<Spaceship> testSpaceShip = newWorld.lock()->SpawnActor<Spaceship>();
-		testSpaceShip.lock()->SetTexture("SpaceShooterRedux/PNG/playerShip1_blue.png");
+		weak<Vanguard> testSpaceShip = newWorld.lock()->SpawnActor<Vanguard>();
 		testSpaceShip.lock()->SetActorLocation(sf::Vector2f{ 100.f, 50.f });
-		testSpaceShip.lock()->SetTeamId(2);
 		//counter = 0.f;
 	}
 	void GameApplication::Tick(float deltatime)
