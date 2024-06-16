@@ -1,5 +1,6 @@
 #pragma once
 #include "framework/Core.h"
+#include "framework/Object.h"
 #include <SFML/Graphics.hpp>
 
 namespace ly
@@ -7,7 +8,7 @@ namespace ly
 	class Actor;
 
 	class Application;
-	class World
+	class World : public Object
 	{
 	public:
 		World(Application* owningApp);
@@ -20,12 +21,12 @@ namespace ly
 
 		template<typename ActorType, typename... Args>
 		weak<ActorType> SpawnActor(Args... args);
-		
+
 		sf::Vector2u GetWindowSize() const;
 		void CleanCycle();
 	private:
-		void BeginPlay();
-		void Tick(float deltaTime);
+		virtual void BeginPlay();
+		virtual void Tick(float deltaTime);
 		Application* mOwningApp;
 		bool mBeganPlay;
 

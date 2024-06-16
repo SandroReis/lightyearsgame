@@ -1,8 +1,9 @@
 #include "framework/Application.h"
-#include "framework/Core.h"
-#include "framework/World.h"
 #include "framework/AssetManager.h"
+#include "framework/Core.h"
 #include "framework/PhysicsSystem.h"
+#include "framework/TimerManager.h"
+#include "framework/World.h"
 
 namespace ly
 {
@@ -12,7 +13,7 @@ namespace ly
 		mTickClock{},
 		currentWorld{ nullptr },
 		mCleanCycleClock{},
-		mCleanCycleIterval{2.f}
+		mCleanCycleIterval{ 2.f }
 	{
 	}
 
@@ -57,6 +58,9 @@ namespace ly
 			currentWorld->TickInternal(deltaTime);
 		}
 
+
+		TimerManager::Get().UpdateTimer(deltaTime);
+
 		PhysicsSystem::Get().Step(deltaTime);
 
 		if (mCleanCycleClock.getElapsedTime().asSeconds() > mCleanCycleIterval)
@@ -87,7 +91,7 @@ namespace ly
 	}
 	void Application::Tick(float deltaTime)
 	{
-		
+
 	}
 }
 
