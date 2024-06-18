@@ -2,6 +2,7 @@
 #include "Enemy/VanguardStage.h"
 #include "framework/World.h"
 
+
 namespace ly
 {
 	VanguardStage::VanguardStage(World* world)
