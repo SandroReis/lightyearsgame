@@ -1,6 +1,7 @@
 #include "Enemy/HexagonStage.h"
 #include "Enemy/TwinBladeStage.h"
 #include "Enemy/UFO.h"
+#include "Enemy/UFOStage.h"
 #include "Enemy/Vanguard.h"
 #include "Enemy/VanguardStage.h"
 #include "framework/Actor.h"
@@ -22,6 +23,7 @@ namespace ly
 		testPlayerSpaceship.lock()->SetActorLocation(sf::Vector2f(300, 490.f));
 		testPlayerSpaceship.lock()->SetActorRotation(-90.f);
 
+
 	}
 	void GameLevelOne::BeginPlay()
 	{
@@ -30,12 +32,16 @@ namespace ly
 	}
 	void GameLevelOne::InitGameStage()
 	{
+
+
 		AddStage(shared<WaitStage>{new WaitStage{ this, 5.f }});
 		AddStage(shared<VanguardStage>{new VanguardStage{ this }});
 		AddStage(shared<WaitStage>{new WaitStage{ this, 10.f }});
 		AddStage(shared<TwinBladeStage>{new TwinBladeStage{ this }});
 		AddStage(shared<WaitStage>{new WaitStage{ this, 10.f }});
 		AddStage(shared<HexagonStage>{new HexagonStage{ this }});
+		AddStage(shared<WaitStage>{new WaitStage{ this, 10.f }});
+		AddStage(shared<UFOStage>{new UFOStage{ this }});
 
 
 

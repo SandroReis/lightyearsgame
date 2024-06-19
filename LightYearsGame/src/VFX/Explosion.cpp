@@ -1,5 +1,6 @@
 #include "framework/MathUtility.h"
 #include "framework/World.h"
+#include "SFML/Graphics.hpp"
 #include "VFX/Explosion.h"
 #include "VFX/Particle.h"
 
@@ -35,5 +36,7 @@ namespace ly
 			newParticle.lock()->GetSprite().setColor(mParticleColor);
 
 		}
+
+
 	}
 }

@@ -8,26 +8,29 @@ namespace ly
 	{
 	public:
 		Spaceship(World* owningWorld, const std::string& texturePath = "");
-		virtual void Tick(float deltatime) override;
-		void SetVelocity(const sf::Vector2f& newVel);
 		sf::Vector2f GetVelocity() const { return mVelocity; };
+		void SetVelocity(const sf::Vector2f& newVel);
+		HealthComponent& GetHealthComp() { return mHealthComp; };
+	public:
+		virtual void Tick(float deltatime) override;
 		virtual void Shoot();
 		virtual void BeginPlay() override;
 		virtual void ApplyDamage(float amt) override;
 
+
 	private:
 		void Blink();
-
 		void UpdateBlink(float deltatime);
-
 		virtual void OnHealthChange(float amt, float health, float maxHealth);
 		virtual void OnTakenDamage(float amt, float health, float maxHealth);
 		virtual void Blow();
-		sf::Vector2f mVelocity;
-		HealthComponent mHealthComp;
 
+	private:
+		sf::Vector2f mVelocity;
+		sf::Color mBlinkColorOffset;
 		float mBlinkTime;
 		float mBlinkDuration;
-		sf::Color mBlinkColorOffset;
+		HealthComponent mHealthComp;
+
 	};
 }
