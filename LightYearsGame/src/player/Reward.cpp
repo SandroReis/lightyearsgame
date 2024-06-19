@@ -25,10 +25,11 @@ namespace ly
 	void Reward::OnActorBeginOverlap(Actor* otherActor)
 	{
 		//TODO: clean up casting
-		PlayerSpaceship* playerSpaceship = static_cast<PlayerSpaceship*>(otherActor);
+		PlayerSpaceship* playerSpaceship = dynamic_cast<PlayerSpaceship*>(otherActor);
 		if (playerSpaceship != nullptr && !playerSpaceship->IsPendingDestroy())
 		{
 			mRewardFunc(playerSpaceship);
+			Destroy();
 		}
 	}
 
@@ -45,7 +46,7 @@ namespace ly
 
 	weak<Reward> CreateFrontWiperReward(World* world)
 	{
-		return CreateReward(world, "SpaceShooterRedux/PNG/pickups/front_row_shooter_pickup.png", RewardThreeWayShooter);
+		return CreateReward(world, "SpaceShooterRedux/PNG/pickups/front_row_shooter_pickup.png", RewardFrontWiper);
 	}
 
 	weak<Reward> CreateReward(World* world, const std::string& texturePath, RewardFunc rewardFunc)

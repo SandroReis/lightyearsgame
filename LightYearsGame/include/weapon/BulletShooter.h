@@ -15,6 +15,7 @@ namespace ly
 		);
 		virtual bool IsOnCooldown() override;
 		void SetBulletTexturePath(const std::string& bulletTexturePath);
+		virtual void IncrementLevel(int amt = 1) override;
 	private:
 		virtual void ShootImpl() override;
 		sf::Clock mCooldownClock;

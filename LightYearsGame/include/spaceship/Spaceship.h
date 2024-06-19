@@ -23,7 +23,9 @@ namespace ly
 		void UpdateBlink(float deltatime);
 		virtual void OnHealthChange(float amt, float health, float maxHealth);
 		virtual void OnTakenDamage(float amt, float health, float maxHealth);
-		virtual void Blow();
+		void Blow();
+		virtual void Blew();
+
 
 	private:
 		sf::Vector2f mVelocity;
