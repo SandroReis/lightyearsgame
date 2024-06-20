@@ -2,9 +2,9 @@
 #include "framework/Core.h"
 #include "framework/Object.h"
 #include <SFML/Graphics.hpp>
-
 namespace ly
 {
+	class HUD;
 	class Actor;
 	class GameStage;
 	class Application;
@@ -25,6 +25,10 @@ namespace ly
 		sf::Vector2u GetWindowSize() const;
 		void CleanCycle();
 		void AddStage(const shared<GameStage>& newStage);
+
+		template<typename HUDType, typename... Args>
+		weak<HUD> SpawnHUD(Args... arg);
+
 	private:
 		virtual void BeginPlay();
 		virtual void Tick(float deltaTime);
@@ -39,6 +43,9 @@ namespace ly
 
 		List<shared<GameStage>>::iterator mCurrentStage;
 
+		shared<HUD> mHUD;
+
+
 		virtual void InitGameStage();
 		void NextGameStage();
 		virtual void AllGameStageFinished();
@@ -51,5 +58,12 @@ namespace ly
 		shared<ActorType> newActor{ new ActorType(this, args...) };
 		mPendingActors.push_back(newActor);
 		return newActor;
+	}
+	template<typename HUDType, typename ...Args>
+	inline weak<HUD> World::SpawnHUD(Args ...arg)
+	{
+		shared<HUDType> newHUD{ new HUDType(args...) };
+		mHUD = newHUD;
+		return mHUD;
 	}
 }
