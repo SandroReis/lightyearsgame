@@ -216,6 +216,7 @@ namespace ly
 	void Actor::Destroy()
 	{
 		UnitializePhysics();
+		onActorDestroy.Broadcast(this);
 		Object::Destroy();
 	}
 }

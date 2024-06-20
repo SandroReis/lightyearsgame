@@ -20,7 +20,6 @@ namespace ly
 		mShooter2.IncrementLevel(amt);
 		mShooter3.IncrementLevel(amt);
 		mShooter4.IncrementLevel(amt);
-
 	}
 	void FrontWiper::ShootImpl()
 	{

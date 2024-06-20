@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "framework/Core.h"
+#include "framework/Delegate.h"
 #include "framework/Object.h"
 
 class b2Body;
@@ -14,11 +15,9 @@ namespace ly
 	{
 	public:
 		Actor(World* owningWorld, const std::string& texturePath = "");
-		virtual ~Actor();
 		void BeginPlayInternal();
 		void TickInternal(float deltatime);
-		virtual void BeginPlay();
-		virtual void Tick(float deltaTime);
+
 		void SetTexture(const std::string& texturePath);
 		void Render(sf::RenderWindow& window);
 
@@ -36,23 +35,26 @@ namespace ly
 
 		World* GetWorld() { return mOwningWorld; };
 		const World* GetWorld() const { return mOwningWorld; };
-
-
 		bool IsActorOutOfWindowBounds(float allowance = 10.f) const;
 		void SetEnablePhysics(bool enable);
-
-		virtual void OnActorBeginOverlap(Actor* other);
-		virtual void OnActorEndOverlap(Actor* other);
-		virtual void Destroy() override;
 		static uint8 GetNeutralTeamId() { return neutralTeamID; };
-
+		sf::Sprite& GetSprite() { return mSprite; };
 		void SetTeamId(uint8 teamID) { mTeamID = teamID; };
 		uint8 GetTeamId() const { return mTeamID; };
 		bool IsOtherHostile(Actor* other) const;
 
-		sf::Sprite& GetSprite() { return mSprite; };
 		const sf::Sprite& GetSprite() const { return mSprite; };
 
+		Delegate<Actor*> onActorDestroy;
+
+
+	public:
+		virtual ~Actor();
+		virtual void BeginPlay();
+		virtual void Tick(float deltaTime);
+		virtual void OnActorBeginOverlap(Actor* other);
+		virtual void OnActorEndOverlap(Actor* other);
+		virtual void Destroy() override;
 		virtual void ApplyDamage(float amt);
 	private:
 		void InitializePhysics();
