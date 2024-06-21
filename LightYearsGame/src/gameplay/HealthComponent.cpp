@@ -25,6 +25,8 @@ namespace ly
 			mHealth = mMaxHealth;
 		}
 
+		onHealthChange.Broadcast(amt, mHealth, mMaxHealth);
+
 		if (amt < 0)
 		{
 			TakenDamage(-amt);
@@ -39,7 +41,6 @@ namespace ly
 			HealthRegen(amt);
 		}*/
 
-		onHealthChange.Broadcast(amt, mHealth, mMaxHealth);
 
 	}
 	/*void HealthComponent::HealthRegen(float amt)

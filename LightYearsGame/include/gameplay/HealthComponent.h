@@ -18,7 +18,7 @@ namespace ly
 
 
 	private:
-		void HealthRegen(float amt);
+		//void HealthRegen(float amt);
 		void HealthEmpty();
 		void TakenDamage(float amt);
 		float mHealth;

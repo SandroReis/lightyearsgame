@@ -1,14 +1,14 @@
-#include "framework/Object.h"
 #include "framework/Core.h"
+#include "framework/Object.h"
 
 namespace ly {
 	Object::Object()
-		: mIsPendingDestroy{false}
+		: mIsPendingDestroy{ false }
 	{
 	}
 	Object::~Object()
 	{
-		LOG("Object destroy");
+		//LOG("Object destroy");
 	}
 	void Object::Destroy()
 	{
@@ -16,7 +16,7 @@ namespace ly {
 		mIsPendingDestroy = true;
 	}
 
-	weak<Object> Object::GetWeakRef() 
+	weak<Object> Object::GetWeakRef()
 	{
 		return weak_from_this();
 	}

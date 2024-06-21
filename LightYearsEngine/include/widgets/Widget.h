@@ -23,10 +23,10 @@ namespace ly {
 			return mWidgetTransform
 				.getRotation();
 		}
-
+		virtual sf::FloatRect GetBound() const;
+		sf::Vector2f GetCenterPosition() const;
 		void SetVisibility(bool newVisibility);
 		bool GetVisibility() const { return mIsVisible; }
-
 	protected:
 		Widget();
 
