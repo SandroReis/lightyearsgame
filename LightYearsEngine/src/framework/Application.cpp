@@ -11,7 +11,7 @@ namespace ly
 		: mWindow{ sf::VideoMode(windowWidth,windowHeigth), title, style },
 		mTargetFramerate{ 60.f },
 		mTickClock{},
-		currentWorld{ nullptr },
+		mCurrentWorld{ nullptr },
 		mCleanCycleClock{},
 		mCleanCycleIterval{ 2.f }
 	{
@@ -53,9 +53,9 @@ namespace ly
 	{
 		Tick(deltaTime);
 
-		if (currentWorld)
+		if (mCurrentWorld)
 		{
-			currentWorld->TickInternal(deltaTime);
+			mCurrentWorld->TickInternal(deltaTime);
 		}
 
 
@@ -67,9 +67,9 @@ namespace ly
 		{
 			mCleanCycleClock.restart();
 			AssetManager::Get().CleanCycle();
-			if (currentWorld)
+			if (mCurrentWorld)
 			{
-				currentWorld->CleanCycle();
+				mCurrentWorld->CleanCycle();
 			}
 		}
 	}
@@ -84,9 +84,9 @@ namespace ly
 	}
 	void Application::Render()
 	{
-		if (currentWorld)
+		if (mCurrentWorld)
 		{
-			currentWorld->Render(mWindow);
+			mCurrentWorld->Render(mWindow);
 		}
 	}
 	void Application::Tick(float deltaTime)

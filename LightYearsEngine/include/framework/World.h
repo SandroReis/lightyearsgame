@@ -28,12 +28,14 @@ namespace ly
 
 		template<typename HUDType, typename... Args>
 		weak<HUD> SpawnHUD(Args... arg);
-
+		bool DispatchEvent(const sf::Event& event);
 	private:
 		virtual void BeginPlay();
 		virtual void Tick(float deltaTime);
 		Application* mOwningApp;
 		bool mBeganPlay;
+
+		void RenderHUD(sf::RenderWindow& window);
 
 		List<shared<Actor>> mActors;
 
@@ -64,6 +66,6 @@ namespace ly
 	{
 		shared<HUDType> newHUD{ new HUDType(args...) };
 		mHUD = newHUD;
-		return mHUD;
+		return newHUD;
 	}
 }

@@ -2,23 +2,27 @@
 
 namespace ly
 {
-	void HUD::NativeInit(sf::RenderWindow& windowRef)
+	void HUD::NativeInit(const sf::RenderWindow& windowRef)
 	{
-		if (!mAlreadInit)
+		if (!mAlreadyInit)
 		{
-			mAlreadInit = true;
+			mAlreadyInit = true;
 			Init(windowRef);
 		}
 	}
-	bool HUD::HandleEvent(const sf::Event& event)
+
+	bool HUD::HandleEvent(const sf::Event& evet)
 	{
 		return false;
 	}
+
 	HUD::HUD()
-		: mAlreadInit{ false }
+		: mAlreadyInit{ false }
 	{
+
 	}
-	void HUD::Init(sf::RenderWindow& windowRef)
+	void HUD::Init(const sf::RenderWindow& windowRef)
 	{
+
 	}
 }

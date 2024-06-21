@@ -37,5 +37,5 @@ namespace ly {
 
 		sf::Transformable mWidgetTransform;
 		bool mIsVisible;
-	}
+	};
 }

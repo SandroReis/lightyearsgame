@@ -1,54 +1,40 @@
 #include "framework/AssetManager.h"
 
-namespace ly {
+namespace ly
+{
 	unique<AssetManager> AssetManager::assetManager{ nullptr };
 
 	AssetManager& AssetManager::Get()
 	{
 		if (!assetManager)
 		{
-			assetManager = std::move(unique <AssetManager>{new AssetManager});
+			assetManager = unique<AssetManager>{ new AssetManager };
 		}
 
 		return *assetManager;
-
 	}
+
 	shared<sf::Texture> AssetManager::LoadTexture(const std::string& path)
 	{
-		auto found = mLoadedTextureMap.find(mRootDirectory + path);
-		if (found != mLoadedTextureMap.end())
-		{
-			return found->second;
-		}
-
-		shared<sf::Texture> newTexture{ new sf::Texture };
-		if (newTexture->loadFromFile(mRootDirectory + path))
-		{
-			mLoadedTextureMap.insert({ path,newTexture });
-			return newTexture;
-		}
-
-		return shared<sf::Texture> {nullptr};
+		return LoadAsset(path, mLoadedTextureMap);
 	}
+
+	shared<sf::Font> AssetManager::LoadFont(const std::string& path)
+	{
+		return LoadAsset(path, mLoadedFontMap);
+	}
+
 	void AssetManager::CleanCycle()
 	{
-		for (auto iter = mLoadedTextureMap.begin(); iter != mLoadedTextureMap.end();)
-		{
-			if (iter->second.unique())
-			{
-				LOG("cleaning texture: %s", iter->first);
-				iter = mLoadedTextureMap.erase(iter);
-			}
-			else
-			{
-				++iter;
-			}
-		}
+		CleanUniqueRef(mLoadedFontMap);
+		CleanUniqueRef(mLoadedTextureMap);
 	}
+
 	void AssetManager::SetAssetRootDirectory(const std::string& directory)
 	{
 		mRootDirectory = directory;
 	}
+
 	AssetManager::AssetManager() : mRootDirectory{}
 	{
 
