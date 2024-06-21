@@ -13,6 +13,7 @@
 #include "level/GameLevelOne.h"
 #include "player/PlayerManager.h"
 #include "player/PlayerSpaceship.h"
+#include "widgets/GameplayHUD.h"
 
 namespace ly
 {
@@ -28,6 +29,8 @@ namespace ly
 		Player newPlayer = PlayerManager::Get().CreateNewPlayer();
 		mPlayerSpaceship = newPlayer.SpawnSpaceship(this);
 		mPlayerSpaceship.lock()->onActorDestroy.BindAction(GetWeakRef(), &GameLevelOne::PlayerSpaceShipDestroyed);
+		mGameplayHUD = SpawnHUD<GameplayHUD>();
+
 	}
 	void GameLevelOne::InitGameStage()
 	{

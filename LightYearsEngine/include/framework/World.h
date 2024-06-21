@@ -1,13 +1,16 @@
 #pragma once
+#include <SFML/Graphics.hpp>
+
 #include "framework/Core.h"
 #include "framework/Object.h"
-#include <SFML/Graphics.hpp>
+
 namespace ly
 {
-	class HUD;
 	class Actor;
-	class GameStage;
+	class HUD;
 	class Application;
+	class GameStage;
+
 	class World : public Object
 	{
 	public:
@@ -22,20 +25,19 @@ namespace ly
 		template<typename ActorType, typename... Args>
 		weak<ActorType> SpawnActor(Args... args);
 
+		template<typename HUDType, typename... Args>
+		weak<HUDType> SpawnHUD(Args... args);
+
 		sf::Vector2u GetWindowSize() const;
 		void CleanCycle();
 		void AddStage(const shared<GameStage>& newStage);
-
-		template<typename HUDType, typename... Args>
-		weak<HUD> SpawnHUD(Args... arg);
 		bool DispatchEvent(const sf::Event& event);
 	private:
 		virtual void BeginPlay();
 		virtual void Tick(float deltaTime);
+		void RenderHUD(sf::RenderWindow& window);
 		Application* mOwningApp;
 		bool mBeganPlay;
-
-		void RenderHUD(sf::RenderWindow& window);
 
 		List<shared<Actor>> mActors;
 
@@ -61,11 +63,13 @@ namespace ly
 		mPendingActors.push_back(newActor);
 		return newActor;
 	}
+
 	template<typename HUDType, typename ...Args>
-	inline weak<HUD> World::SpawnHUD(Args ...arg)
+	inline weak<HUDType> World::SpawnHUD(Args ...args)
 	{
 		shared<HUDType> newHUD{ new HUDType(args...) };
 		mHUD = newHUD;
 		return newHUD;
 	}
+
 }
