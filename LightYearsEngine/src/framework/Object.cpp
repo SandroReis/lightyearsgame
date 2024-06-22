@@ -2,8 +2,9 @@
 #include "framework/Object.h"
 
 namespace ly {
+	unsigned int Object::uniqueIDCounter = 0;
 	Object::Object()
-		: mIsPendingDestroy{ false }
+		: mIsPendingDestroy{ false }, mUniqueID{ GetNextAvaliableID() }
 	{
 	}
 	Object::~Object()
@@ -23,5 +24,9 @@ namespace ly {
 	weak<const Object> Object::GetWeakRef() const
 	{
 		return weak_from_this();
+	}
+	unsigned int Object::GetNextAvaliableID()
+	{
+		return uniqueIDCounter++;
 	}
 }

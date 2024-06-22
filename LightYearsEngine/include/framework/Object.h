@@ -1,7 +1,7 @@
 #pragma	once
-#include <memory>
-#include <framework/Core.h>
 #include "framework/Delegate.h"
+#include <framework/Core.h>
+#include <memory>
 
 namespace ly
 {
@@ -17,7 +17,12 @@ namespace ly
 		weak<Object> GetWeakRef();
 		weak<const Object> GetWeakRef() const;
 		Delegate<Object*> onDestroy;
+		unsigned int GetUniqueID() const { return mUniqueID; }
 	private:
 		bool mIsPendingDestroy;
+		unsigned int mUniqueID;
+		static unsigned int uniqueIDCounter;
+		static unsigned int GetNextAvaliableID();
+
 	};
 }
