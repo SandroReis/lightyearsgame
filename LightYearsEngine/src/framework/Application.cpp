@@ -31,7 +31,12 @@ namespace ly
 				{
 					mWindow.close();
 				}
+				else
+				{
+					DispatchEvent(windowEvent);
+				}
 			}
+
 
 			float frameDeltaTime = mTickClock.restart().asSeconds();
 			accumulatedTime += frameDeltaTime;
@@ -48,6 +53,14 @@ namespace ly
 	sf::Vector2u Application::GetWindowSize() const
 	{
 		return mWindow.getSize();
+	}
+	bool Application::DispatchEvent(const sf::Event& event)
+	{
+		if (mCurrentWorld)
+		{
+			return mCurrentWorld->DispatchEvent(event);
+		}
+		return false;
 	}
 	void Application::TickInternal(float deltaTime)
 	{

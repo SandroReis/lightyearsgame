@@ -17,7 +17,7 @@ namespace ly {
 		virtual void Draw(sf::RenderWindow& windowRef) override;
 		virtual void Tick(float deltatime) override;
 
-
+		virtual bool HandleEvent(const sf::Event& event) override;
 	private:
 		void PlayerLifeCountUpdated(int amt);
 		void PlayerScoreUpdated(int amt);
@@ -33,8 +33,10 @@ namespace ly {
 		TextWidget mPlayerScoreText;
 
 
-		//@TODO remove
-		Button mTextButton;
+		//TODO: remove
+		void TestButtonClick();
+		//TODO: remove
+		Button TestButton;
 
 
 		void RefreshHealthBar();

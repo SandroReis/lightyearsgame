@@ -1,6 +1,7 @@
 #pragma once
+#include <functional>
+
 #include "framework/Core.h"
-#include "functional"
 
 namespace ly
 {
@@ -11,9 +12,8 @@ namespace ly
 	{
 	public:
 		template<typename ClassName>
-		void BindAction(weak<Object> obj, void(ClassName::*callback)(Args...))
+		void BindAction(weak<Object> obj, void(ClassName::* callback)(Args...))
 		{
-			
 			std::function<bool(Args...)> callbackFunc = [obj, callback](Args... args)->bool
 				{
 					if (!obj.expired())
@@ -42,6 +42,7 @@ namespace ly
 				}
 			}
 		}
+
 	private:
 		List<std::function<bool(Args...)>> mCallbacks;
 	};

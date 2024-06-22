@@ -11,7 +11,7 @@ namespace ly
 		}
 	}
 
-	bool HUD::HandleEvent(const sf::Event& evet)
+	bool HUD::HandleEvent(const sf::Event& event)
 	{
 		return false;
 	}
@@ -26,7 +26,7 @@ namespace ly
 
 	}
 
-	void HUD::Tick(float deltatime)
+	void HUD::Tick(float deltaTime)
 	{
 
 	}
