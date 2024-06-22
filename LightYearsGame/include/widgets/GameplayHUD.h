@@ -18,14 +18,22 @@ namespace ly {
 
 	private:
 		void PlayerLifeCountUpdated(int amt);
+		void PlayerScoreUpdated(int amt);
+
 		virtual void Init(const sf::RenderWindow& windowRef) override;
 		void PlayerHealthUpdated(float amt, float currentHealth, float maxHealth);
 		TextWidget mFramerateText;
 		TextWidget mPlayerLifeCountText;
 		ValueGuage mPlayerHealthBar;
 		ImageWidget mPlayerLifeIcon;
+
+		ImageWidget mPlayerScoreIcon;
+		TextWidget mPlayerScoreText;
+
+
 		void RefreshHealthBar();
-		void ObserverLifeCount();
+		void ObserverPlayerStats();
+
 		void PlayerSpaceshipDestroyed(Actor* actor);
 		sf::Color mHealthyHealthBarColor;
 		sf::Color mCriticalHealthBarColor;
