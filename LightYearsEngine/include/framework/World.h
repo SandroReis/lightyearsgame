@@ -22,6 +22,10 @@ namespace ly
 
 		virtual ~World();
 
+		Application* GetApplication() { return mOwningApp; }
+		const Application* GetApplication() const { return mOwningApp; }
+
+
 		template<typename ActorType, typename... Args>
 		weak<ActorType> SpawnActor(Args... args);
 

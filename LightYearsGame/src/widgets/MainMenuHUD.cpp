@@ -14,7 +14,9 @@ namespace ly
 	}
 	bool MainMenuHUD::HandleEvent(const sf::Event& event)
 	{
-		return mStartButton.HandleEvent(event) || mQuitButton.HandleEvent(event) || HUD::HandleEvent(event);
+		bool start = mStartButton.HandleEvent(event);
+		bool quit = mQuitButton.HandleEvent(event);
+		return start || quit || HUD::HandleEvent(event);
 	}
 	void MainMenuHUD::Draw(sf::RenderWindow& windowRef)
 	{
@@ -26,12 +28,11 @@ namespace ly
 	void MainMenuHUD::Init(const sf::RenderWindow& windowRef)
 	{
 		sf::Vector2u windowSize = windowRef.getSize();
-		mTitleText.SetWidgetLocation({ windowSize.x / 2.f,100.f });
-		mStartButton.SetWidgetLocation({ windowSize.x / 2.f, windowSize.y / 2.f });
+		mTitleText.SetWidgetLocation({ windowSize.x / 2.f - mTitleText.GetBound().width / 2.f,100.f });
+		mStartButton.SetWidgetLocation({ windowSize.x / 2.f - mStartButton.GetBound().width / 2.f, windowSize.y / 2.f });
 		mQuitButton.SetWidgetLocation(mStartButton.GetWidgetLocation() + sf::Vector2f{ 0.f, 50.f });
 		mStartButton.onButtonClicked.BindAction(GetWeakRef(), &MainMenuHUD::StartButtonClicked);
 		mQuitButton.onButtonClicked.BindAction(GetWeakRef(), &MainMenuHUD::QuitButtonClicked);
-
 	}
 	void MainMenuHUD::StartButtonClicked()
 	{

@@ -32,13 +32,6 @@ namespace ly {
 		ImageWidget mPlayerScoreIcon;
 		TextWidget mPlayerScoreText;
 
-
-		//TODO: remove
-		void TestButtonClick();
-		//TODO: remove
-		Button TestButton;
-
-
 		void RefreshHealthBar();
 		void ObserverPlayerStats();
 
