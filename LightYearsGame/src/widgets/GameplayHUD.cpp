@@ -16,7 +16,8 @@ namespace ly
 		mHealthyHealthBarColor{ 128,255,128,255 },
 		mCriticalHealthBarColor{ 255,0,0,255 },
 		mCriticalThreshould{ 0.35 },
-		mWidgetSpacing{ 10.f }
+		mWidgetSpacing{ 10.f },
+		mTextButton{}
 	{
 		mFramerateText.SetTextSize(25);
 		mPlayerLifeCountText.SetTextSize(20);
@@ -31,6 +32,7 @@ namespace ly
 		mPlayerLifeCountText.NativeDraw(windowRef);
 		mPlayerScoreIcon.NativeDraw(windowRef);
 		mPlayerScoreText.NativeDraw(windowRef);
+		mTextButton.NativeDraw(windowRef);
 	}
 	void GameplayHUD::Tick(float deltatime)
 	{
@@ -65,6 +67,8 @@ namespace ly
 
 		nextIconPos += sf::Vector2f{ mPlayerScoreIcon.GetBound().width + mWidgetSpacing, 2.f };
 		mPlayerScoreText.SetWidgetLocation(nextIconPos);
+
+		mTextButton.SetWidgetLocation({ windowSize.x / 2.f, windowSize.y / 2.f });
 
 		RefreshHealthBar();
 		ObserverPlayerStats();

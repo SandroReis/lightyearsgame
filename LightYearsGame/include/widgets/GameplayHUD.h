@@ -1,8 +1,10 @@
 #pragma once
+#include "widgets/Button.h"
 #include "widgets/HUD.h"
 #include "widgets/ImageWidget.h"
 #include "widgets/TextWidget.h"
 #include "widgets/ValueGuage.h"
+
 
 
 namespace ly {
@@ -29,6 +31,10 @@ namespace ly {
 
 		ImageWidget mPlayerScoreIcon;
 		TextWidget mPlayerScoreText;
+
+
+		//@TODO remove
+		Button mTextButton;
 
 
 		void RefreshHealthBar();
