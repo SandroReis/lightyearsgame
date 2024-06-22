@@ -15,12 +15,15 @@ namespace ly
 			{
 				CreateHealthReward,
 				CreateThreeWayShooterReward,
-				CreateFrontWiperReward
-			}
+				CreateFrontWiperReward,
+				CreateLifeReward
+			},
+			float rewardSpawnRate = .5f
 		);
 		virtual void Tick(float deltaTime) override;
 		void SetScoreAwardAmt(unsigned int amt);
 	private:
+		float mRewardSpawnWeight;
 		void SpawnReward();
 		float mCollisionDamage;
 		virtual void OnActorBeginOverlap(Actor* other) override;
