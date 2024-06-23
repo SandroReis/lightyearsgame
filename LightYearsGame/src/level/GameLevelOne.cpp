@@ -1,3 +1,4 @@
+#include "Enemy/ChaosStage.h"
 #include "Enemy/HexagonStage.h"
 #include "Enemy/TwinBladeStage.h"
 #include "Enemy/UFO.h"
@@ -21,8 +22,6 @@ namespace ly
 		: World{ owningApp }
 	{
 
-
-
 	}
 	void GameLevelOne::BeginPlay()
 	{
@@ -35,6 +34,8 @@ namespace ly
 	void GameLevelOne::InitGameStage()
 	{
 
+		AddStage(shared<ChaosStage>{new ChaosStage{ this }});
+		AddStage(shared<WaitStage>{new WaitStage{ this, 4.f }});
 
 		//AddStage(shared<WaitStage>{new WaitStage{ this, 5.f }});
 		AddStage(shared<VanguardStage>{new VanguardStage{ this }});
