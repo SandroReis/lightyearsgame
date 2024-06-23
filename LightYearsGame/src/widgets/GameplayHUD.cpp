@@ -16,21 +16,39 @@ namespace ly
 		mHealthyHealthBarColor{ 128,255,128,255 },
 		mCriticalHealthBarColor{ 255,0,0,255 },
 		mCriticalThreshould{ 0.35 },
-		mWidgetSpacing{ 10.f }
+		mWidgetSpacing{ 10.f },
+		mWinLoseText{ "" },
+		mFinalScoreText{ "" },
+		mRestartButton{ "Restart" },
+		mQuitButton{ "Quit" },
+		mWindowSize{}
 	{
 		mFramerateText.SetTextSize(25);
 		mPlayerLifeCountText.SetTextSize(20);
 		mPlayerScoreText.SetTextSize(20);
+		mWinLoseText.SetTextSize(40);
+		mFinalScoreText.SetTextSize(40);
+
+
+		mWinLoseText.SetVisiblity(false);
+		mFinalScoreText.SetVisiblity(false);
+		mRestartButton.SetVisiblity(false);
+		mQuitButton.SetVisiblity(false);
 
 	}
 	void GameplayHUD::Draw(sf::RenderWindow& windowRef)
 	{
+		mWindowSize = windowRef.getSize();
 		mFramerateText.NativeDraw(windowRef);
 		mPlayerHealthBar.NativeDraw(windowRef);
 		mPlayerLifeIcon.NativeDraw(windowRef);
 		mPlayerLifeCountText.NativeDraw(windowRef);
 		mPlayerScoreIcon.NativeDraw(windowRef);
 		mPlayerScoreText.NativeDraw(windowRef);
+		mWinLoseText.NativeDraw(windowRef);
+		mFinalScoreText.NativeDraw(windowRef);
+		mRestartButton.NativeDraw(windowRef);
+		mQuitButton.NativeDraw(windowRef);
 	}
 	void GameplayHUD::Tick(float deltatime)
 	{
@@ -40,7 +58,17 @@ namespace ly
 	}
 	bool GameplayHUD::HandleEvent(const sf::Event& event)
 	{
+		if (mRestartButton.HandleEvent(event)) return true;
+		if (mQuitButton.HandleEvent(event)) return true;
 		return HUD::HandleEvent(event);
+	}
+	void GameplayHUD::RestartButtonClicked()
+	{
+		onRestartBtnClicked.Broadcast();
+	}
+	void GameplayHUD::QuitButtonClicked()
+	{
+		onQuitBtnClicked.Broadcast();
 	}
 	void GameplayHUD::PlayerLifeCountUpdated(int amt)
 	{
@@ -54,6 +82,8 @@ namespace ly
 	{
 
 		auto windowSize = windowRef.getSize();
+		mWindowSize = windowSize;
+
 		mPlayerHealthBar.SetWidgetLocation(sf::Vector2f{ 20.f, windowSize.y - 50.f });
 		sf::Vector2f nextIconPos = mPlayerHealthBar.GetWidgetLocation();
 
@@ -74,6 +104,18 @@ namespace ly
 
 		RefreshHealthBar();
 		ObserverPlayerStats();
+
+
+		mWinLoseText.SetWidgetLocation({ windowSize.x / 2.f - mWinLoseText.GetBound().width / 2.f,100.f });
+
+
+		mFinalScoreText.SetWidgetLocation({ windowSize.x / 2.f - mFinalScoreText.GetBound().width / 2.f,200.f });
+
+		mRestartButton.SetWidgetLocation({ windowSize.x / 2.f - mRestartButton.GetBound().width / 2.f, windowSize.y / 2.f });
+		mQuitButton.SetWidgetLocation(mRestartButton.GetWidgetLocation() + sf::Vector2f{ 0.f, 50.f });
+
+		mRestartButton.onButtonClicked.BindAction(GetWeakRef(), &GameplayHUD::RestartButtonClicked);
+		mQuitButton.onButtonClicked.BindAction(GetWeakRef(), &GameplayHUD::QuitButtonClicked);
 	}
 	void GameplayHUD::PlayerHealthUpdated(float amt, float currentHealth, float maxHealth)
 	{
@@ -117,5 +159,28 @@ namespace ly
 	void GameplayHUD::PlayerSpaceshipDestroyed(Actor* actor)
 	{
 		RefreshHealthBar();
+	}
+	void GameplayHUD::GameFinished(bool playerWon)
+	{
+		mWinLoseText.SetVisiblity(true);
+		mFinalScoreText.SetVisiblity(true);
+		mRestartButton.SetVisiblity(true);
+		mQuitButton.SetVisiblity(true);
+
+
+		int score = PlayerManager::Get().GetPlayer()->GetScore();
+		mFinalScoreText.SetString("Score: " + std::to_string(score));
+		if (playerWon)
+		{
+			mWinLoseText.SetString("You win!");
+		}
+		else
+		{
+			mWinLoseText.SetString("You Lose!");
+		}
+
+		mWinLoseText.SetWidgetLocation({ mWindowSize.x / 2.f - mWinLoseText.GetBound().width / 2.f,100.f });
+
+		mFinalScoreText.SetWidgetLocation({ mWindowSize.x / 2.f - mFinalScoreText.GetBound().width / 2.f,200.f });
 	}
 }

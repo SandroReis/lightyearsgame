@@ -18,7 +18,16 @@ namespace ly {
 		virtual void Tick(float deltatime) override;
 
 		virtual bool HandleEvent(const sf::Event& event) override;
+		void GameFinished(bool playerWon);
+
+
+		Delegate<> onRestartBtnClicked;
+		Delegate<> onQuitBtnClicked;
+
 	private:
+
+		void RestartButtonClicked();
+		void QuitButtonClicked();
 		void PlayerLifeCountUpdated(int amt);
 		void PlayerScoreUpdated(int amt);
 
@@ -42,5 +51,11 @@ namespace ly {
 
 		float mWidgetSpacing;
 
+		TextWidget mWinLoseText;
+		TextWidget mFinalScoreText;
+		Button mRestartButton;
+		Button mQuitButton;
+
+		sf::Vector2u mWindowSize;
 	};
 }
