@@ -15,6 +15,8 @@ namespace ly
 		);
 
 		virtual void IncrementLevel(int amt = 1) override;
+		virtual void SetCurrentLevel(int level) override;
+
 
 	private:
 		virtual void ShootImpl() override;
