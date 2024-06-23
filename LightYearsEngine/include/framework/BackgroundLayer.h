@@ -17,7 +17,12 @@ namespace ly
 
 		);
 
+
+		void SetAssets(const List<std::string>& assetPaths);
 	private:
+		void RefreshSprites();
+		void RandomSpriteTexture(sf::Sprite& sprite);
+
 		sf::Vector2f mMinVelocity;
 		sf::Vector2f mMaxVelocity;
 		float mSizeMin;
