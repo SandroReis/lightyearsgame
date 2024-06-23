@@ -18,6 +18,15 @@ namespace ly
 			Destroy();
 		}
 	}
+	void EnemySpaceship::SetRewardSpawnWeight(float weight)
+	{
+		if (weight < 0 || weight > 1)
+		{
+			return;
+		}
+
+		mRewardSpawnWeight = weight;
+	}
 	void EnemySpaceship::SetScoreAwardAmt(unsigned int amt)
 	{
 		mScoreAwardAmt = amt;

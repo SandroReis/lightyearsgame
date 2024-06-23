@@ -11,6 +11,8 @@ namespace ly
 		float GetHealth() const { return mHealth; };
 		float GetMaxHealth() const { return mMaxHealth; };
 
+		void SetInitialHealth(float health, float maxHeath);
+
 		Delegate<float, float, float> onHealthChange;
 		Delegate<float, float, float> onTakenDamage;
 		Delegate<> onHealthEmpty;

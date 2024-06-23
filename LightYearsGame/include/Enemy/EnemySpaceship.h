@@ -21,6 +21,7 @@ namespace ly
 			float rewardSpawnRate = .5f
 		);
 		virtual void Tick(float deltaTime) override;
+		void SetRewardSpawnWeight(float weight);
 		void SetScoreAwardAmt(unsigned int amt);
 	private:
 		float mRewardSpawnWeight;

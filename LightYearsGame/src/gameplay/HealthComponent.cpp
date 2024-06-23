@@ -43,6 +43,11 @@ namespace ly
 
 
 	}
+	void HealthComponent::SetInitialHealth(float health, float maxHeath)
+	{
+		mHealth = health;
+		mMaxHealth = maxHeath;
+	}
 	/*void HealthComponent::HealthRegen(float amt)
 	{
 		LOG("Health regen: %f, now health is: %f/%f", amt, mHealth, mMaxHealth);
