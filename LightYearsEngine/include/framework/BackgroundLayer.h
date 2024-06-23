@@ -19,9 +19,18 @@ namespace ly
 
 
 		void SetAssets(const List<std::string>& assetPaths);
+		void SetColorTint(const sf::Color& color);
+
 	private:
 		void RefreshSprites();
 		void RandomSpriteTexture(sf::Sprite& sprite);
+		void RandomSpriteTransform(sf::Sprite& sprite, bool randomY = false);
+		void RandomSpritePosition(sf::Sprite& sprite, bool randomY);
+		void RandomSpriteRotation(sf::Sprite& sprite);
+		void RandomSpriteSize(sf::Sprite& sprite);
+
+
+		shared<sf::Texture> GetRandomTexture() const;
 
 		sf::Vector2f mMinVelocity;
 		sf::Vector2f mMaxVelocity;
