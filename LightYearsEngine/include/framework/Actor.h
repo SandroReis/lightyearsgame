@@ -47,7 +47,7 @@ namespace ly
 
 		Delegate<Actor*> onActorDestroy;
 
-
+		void SetTextureRepeated(bool repeated);
 	public:
 		virtual ~Actor();
 		virtual void BeginPlay();

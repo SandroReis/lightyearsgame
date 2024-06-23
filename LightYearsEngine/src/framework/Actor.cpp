@@ -21,6 +21,11 @@ namespace ly
 		SetTexture(texturePath);
 	}
 
+	void Actor::SetTextureRepeated(bool repeated)
+	{
+		mTexture->setRepeated(repeated);
+	}
+
 	Actor::~Actor()
 	{
 		//LOG("Actor destroyed");

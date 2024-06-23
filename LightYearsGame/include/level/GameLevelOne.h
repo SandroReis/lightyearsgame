@@ -18,6 +18,8 @@ namespace ly
 		weak<PlayerSpaceship> mPlayerSpaceship;
 		weak<GameplayHUD> mGameplayHUD;
 
+		void SpawnCosmetics();
+
 		virtual void InitGameStages() override;
 		void PlayerSpaceShipDestroyed(Actor* destroyedPlayerSpaceship);
 		void QuitGame();
