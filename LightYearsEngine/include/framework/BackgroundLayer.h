@@ -20,8 +20,14 @@ namespace ly
 
 		void SetAssets(const List<std::string>& assetPaths);
 		void SetColorTint(const sf::Color& color);
+		void SetSpriteCount(int newCount);
+		virtual void Render(sf::RenderWindow& window) override;
+		virtual void Tick(float deltatime) override;
+		void SetVelocities(const sf::Vector2f& min, const sf::Vector2f& max);
+		void SetSizes(float min, float max);
 
 	private:
+		bool IsSpriteOffScreen(sf::Sprite& sprite) const;
 		void RefreshSprites();
 		void RandomSpriteTexture(sf::Sprite& sprite);
 		void RandomSpriteTransform(sf::Sprite& sprite, bool randomY = false);
