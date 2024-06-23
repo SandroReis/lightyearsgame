@@ -24,7 +24,7 @@ namespace ly
 		{
 			mBeganPlay = true;
 			BeginPlay();
-			InitGameStage();
+			InitGameStages();
 			StartStages();
 		}
 	}
@@ -130,7 +130,7 @@ namespace ly
 
 	}
 
-	void World::InitGameStage()
+	void World::InitGameStages()
 	{
 	}
 

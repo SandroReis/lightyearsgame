@@ -54,7 +54,7 @@ namespace ly
 		shared<HUD> mHUD;
 
 
-		virtual void InitGameStage();
+		virtual void InitGameStages();
 		void NextGameStage();
 		virtual void AllGameStageFinished();
 		void StartStages();

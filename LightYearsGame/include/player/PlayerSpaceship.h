@@ -1,6 +1,6 @@
 #pragma once
+#include "framework/TimerManager.h"
 #include "spaceship/Spaceship.h"
-
 
 namespace ly
 {
@@ -16,8 +16,12 @@ namespace ly
 	public:
 		virtual void Tick(float deltatime) override;
 		virtual void Shoot() override;
+		virtual void ApplyDamage(float amt) override;
+		virtual void BeginPlay() override;
 
 	private:
+		void UpdateInvulnerable(float deltatime);
+		void StopInvunerable();
 		void NormalizeInput();
 		void ClampInputOnEdge();
 		void HandleInput();
@@ -25,6 +29,13 @@ namespace ly
 
 	private:
 		float mSpeed;
+		float mInvulnerableTime;
+		TimerHandle mInvulnerableTimerHandle;
+		bool mIsInvulnerable;
+		float mInvulnerableFlashInterval;
+		float mInvulnerableFlashTimer;
+		float mInvulnerableFlashDir;
+
 		sf::Vector2f mMoveInput;
 		unique<Shooter> mShooter;
 
