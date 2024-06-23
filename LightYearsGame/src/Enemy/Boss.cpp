@@ -6,9 +6,10 @@ namespace ly
 	Boss::Boss(World* world)
 		: EnemySpaceship{ world, "SpaceShooterRedux/PNG/Enemies/boss.png" },
 		mSpeed{ 100.f },
+		mBaseSpeed{ 100.f },
 		mSwitchDistanceToEdge{ 100.f },
-		mBaseShooterLeft{ this, 1.0f, {50.f, -50.f} },
-		mBaseShooterRight{ this, 1.0f, {50.f, 50.f} },
+		mBaseShooterLeft{ this, 1.f, {50.f, -50.f} },
+		mBaseShooterRight{ this, 1.f, {50.f, 50.f} },
 		mThreeWayShooter{ this, 4.f, {100.f, 0.f} },
 		mFrontWiperLeft{ this, 5.f, {80.f, -100} },
 		mFrontWiperRight{ this, 5.f, {80.f, 100} },
@@ -42,6 +43,7 @@ namespace ly
 		HealthComponent& healthComp = GetHealthComp();
 		healthComp.SetInitialHealth(3000.f, 3000.f);
 		healthComp.onHealthChange.BindAction(GetWeakRef(), &Boss::HealthChanged);
+		//SetStage(4);
 	}
 	void Boss::CheckMove()
 	{
@@ -95,5 +97,6 @@ namespace ly
 		mFrontWiperLeft.SetCurrentLevel(mStage);
 		mFrontWiperRight.SetCurrentLevel(mStage);
 		mThreeWayShooter.SetCurrentLevel(mStage);
+		mSpeed = mStage * mBaseSpeed;
 	}
 }
