@@ -12,7 +12,7 @@ namespace ly
 		: Spaceship{ owningWorld, path },
 		mMoveInput{},
 		mSpeed{ 200.f },
-		mShooter{ new ThreeWayShooter {this, 1.f, {50.f, 0.f}} },
+		mShooter{ new BulletShooter {this, .5f, {50.f, 0.f}} },
 		mInvulnerableTime{ 2.f },
 		mIsInvulnerable{ true },
 		mInvulnerableFlashInterval{ 0.5f },
