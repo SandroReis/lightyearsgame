@@ -1,6 +1,7 @@
 #include "Enemy/Hexagon.h"
 #include "Enemy/HexagonStage.h"
 #include "framework/World.h"
+#include "weapon/BulletShooter.h"
 
 namespace ly
 {

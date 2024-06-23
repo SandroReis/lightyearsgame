@@ -136,6 +136,10 @@ namespace ly
 			if (IsSpriteOffScreen(sprite))
 			{
 				RandomSpriteTransform(sprite);
+				RandomSpriteTexture(sprite);
+				float velX = RandomRange(mMinVelocity.x, mMaxVelocity.x);
+				float velY = RandomRange(mMinVelocity.y, mMaxVelocity.y);
+				mVelocities[i] = sf::Vector2f{ velX,velY };
 			}
 		}
 	}

@@ -1,8 +1,8 @@
 #include "framework/World.h"
 #include "player/Player.h"
 #include "player/PlayerSpaceship.h"
-
 #include "weapon/BulletShooter.h"
+
 namespace ly
 {
 	Player::Player()

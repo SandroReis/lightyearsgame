@@ -1,6 +1,7 @@
 #include "Enemy/TwinBlade.h"
 #include "Enemy/TwinBladeStage.h"
 #include "framework/World.h"
+#include "weapon/BulletShooter.h"
 
 namespace ly
 {
