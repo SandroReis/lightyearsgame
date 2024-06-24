@@ -12,9 +12,9 @@ This project was developed to achieve the following learning objectives:
 
 <table>
   <tr>
-    <td style="border: none;"><img src="boss.gif" alt="Boss Fight" width="410"></td>
-    <td style="border: none; width: 30px;"></td>
-    <td style="border: none;"><img src="chaos.gif" alt="Chaos Scene" width="410"></td>
+    <td style="border: none;"><img src="boss.gif" alt="Boss Fight" width="380"></td>
+    <td style="border: none; width: 15px;"></td>
+    <td style="border: none;"><img src="chaos.gif" alt="Chaos Scene" width="380"></td>
   </tr>
 </table>
 
