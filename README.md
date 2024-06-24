@@ -1,6 +1,6 @@
 
 # Light Years Game
-Welcome to the Light Years Game repository! This project is a space-themed adventure game and the engine was developed using C++, CMake, and the Simple and Fast Multimedia Library (SFML).
+Welcome to the Light Years Game repository! This project is a space-themed adventure game. the game and the engine were developed using C++, CMake, and the Simple and Fast Multimedia Library (SFML).
 
 # Learning Objectives
 This project was developed to achieve the following learning objectives:
