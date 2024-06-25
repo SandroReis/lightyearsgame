@@ -22,6 +22,8 @@ namespace ly
 	private:
 		virtual void Init(const sf::RenderWindow& windowRef) override;
 		TextWidget mTitleText;
+		TextWidget mVolumeTipText;
+
 
 		Button mStartButton;
 		Button mQuitButton;

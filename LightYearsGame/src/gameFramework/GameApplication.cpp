@@ -1,5 +1,6 @@
 #include "config.h"
 #include "framework/AssetManager.h"
+#include "framework/SoundSystem.h"
 #include "gameFramework/GameApplication.h"
 #include "level/GameLevelOne.h"
 #include "level/MainMenuLevel.h"
@@ -15,6 +16,7 @@ namespace ly
 		: Application{ 600,980, "LightYears", sf::Style::Titlebar | sf::Style::Close }
 	{
 		AssetManager::Get().SetAssetRootDirectory(GetResourceDir());
+		SoundSystem::Get().SetAssetRootDirectory(GetResourceDir());
 		weak<MainMenuLevel> newWorld = LoadWorld<MainMenuLevel>();
 
 		//weak<GameLevelOne> newWorld = LoadWorld<GameLevelOne>();

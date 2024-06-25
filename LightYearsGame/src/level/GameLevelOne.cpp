@@ -12,6 +12,7 @@
 #include "framework/AssetManager.h"
 #include "framework/BackdropActor.h"
 #include "framework/BackgroundLayer.h"
+#include "framework/SoundSystem.h"
 #include "framework/TimerManager.h"
 #include "framework/World.h"
 #include "gameplay/GameStage.h"
@@ -43,6 +44,7 @@ namespace ly
 		mGameplayHUD = SpawnHUD<GameplayHUD>();
 		mGameplayHUD.lock()->onQuitBtnClicked.BindAction(GetWeakRef(), &GameLevelOne::QuitGame);
 		mGameplayHUD.lock()->onRestartBtnClicked.BindAction(GetWeakRef(), &GameLevelOne::RestartGame);
+		SoundSystem::Get().PlayMusic("SpaceShooterRedux/sounds/music/outer_space_1.ogg");
 	}
 
 	void GameLevelOne::PlayerSpaceShipDestroyed(Actor* destoryedPlayerSpaceship)
@@ -122,8 +124,6 @@ namespace ly
 	void GameLevelOne::InitGameStages()
 	{
 
-		AddStage(shared<ChaosStage>{new ChaosStage{ this }});
-
 
 		AddStage(shared<WaitStage>{new WaitStage{ this, 2.f }});
 		AddStage(shared<VanguardStage>{new VanguardStage{ this }});
@@ -140,7 +140,7 @@ namespace ly
 		AddStage(shared<WaitStage>{new WaitStage{ this, 5.f }});
 		AddStage(shared<ChaosStage>{new ChaosStage{ this }});
 
-		AddStage(shared<WaitStage>{new WaitStage{ this, 5.f }});
+		AddStage(shared<WaitStage>{new WaitStage{ this, 15.f }});
 		AddStage(shared<BossStage>{new BossStage{ this }});
 
 

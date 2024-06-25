@@ -1,9 +1,12 @@
 #include "framework/Actor.h"
 #include "framework/Application.h"
 #include "framework/Core.h"
+#include "framework/SoundSystem.h"
 #include "framework/World.h"
 #include "gameplay/GameStage.h"
+#include "SFML/System.hpp"
 #include "widgets/HUD.h"
+
 
 namespace ly
 {
@@ -56,6 +59,16 @@ namespace ly
 			if (!mHUD->HasInit())
 				mHUD->NativeInit(mOwningApp->GetWindow());
 			mHUD->Tick(deltaTime);
+		}
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Add) || sf::Keyboard::isKeyPressed(sf::Keyboard::Equal))
+		{
+			SoundSystem::Get().IncreaseVol(1.f);
+		}
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Subtract) || sf::Keyboard::isKeyPressed(sf::Keyboard::Hyphen))
+		{
+			SoundSystem::Get().DecreaseVol(1.f);
 		}
 	}
 
