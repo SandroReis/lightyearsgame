@@ -1,6 +1,9 @@
+#include "framework/Core.h"
+#include "framework/SoundSystem.h"
 #include "widgets/MainMenuHUD.h"
 
 namespace ly
+
 {
 	MainMenuHUD::MainMenuHUD()
 		: mTitleText{ "Light Years" },
@@ -10,7 +13,6 @@ namespace ly
 		mTitleText.SetTextSize(40);
 		mStartButton.SetTextSize(20);
 		mQuitButton.SetTextSize(20);
-
 	}
 	bool MainMenuHUD::HandleEvent(const sf::Event& event)
 	{
@@ -33,6 +35,8 @@ namespace ly
 		mQuitButton.SetWidgetLocation(mStartButton.GetWidgetLocation() + sf::Vector2f{ 0.f, 50.f });
 		mStartButton.onButtonClicked.BindAction(GetWeakRef(), &MainMenuHUD::StartButtonClicked);
 		mQuitButton.onButtonClicked.BindAction(GetWeakRef(), &MainMenuHUD::QuitButtonClicked);
+
+		SoundSystem::Get().PlayMusic("D:/gamedev/projects/LightYears/LightYearsGame/assets/SpaceShooterRedux/sounds/music/CrashedShip.ogg");
 	}
 	void MainMenuHUD::StartButtonClicked()
 	{

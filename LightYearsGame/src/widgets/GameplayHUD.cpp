@@ -1,4 +1,5 @@
 #include "framework/Actor.h"
+#include "framework/SoundSystem.h"
 #include "player/Player.h"
 #include "player/PlayerManager.h"
 #include "player/PlayerSpaceship.h"
@@ -34,6 +35,7 @@ namespace ly
 		mFinalScoreText.SetVisiblity(false);
 		mRestartButton.SetVisiblity(false);
 		mQuitButton.SetVisiblity(false);
+
 
 	}
 	void GameplayHUD::Draw(sf::RenderWindow& windowRef)

@@ -11,6 +11,9 @@ add_library(${LIGHT_YEARS_ENGINE_TARGET_NAME} STATIC
 	${CMAKE_CURRENT_SOURCE_DIR}/include/framework/MathUtility.h
 	${CMAKE_CURRENT_SOURCE_DIR}/src/framework/MathUtility.cpp
 
+	${CMAKE_CURRENT_SOURCE_DIR}/include/framework/SoundSystem.h
+	${CMAKE_CURRENT_SOURCE_DIR}/src/framework/SoundSystem.cpp
+
 	${CMAKE_CURRENT_SOURCE_DIR}/include/framework/Object.h
 	${CMAKE_CURRENT_SOURCE_DIR}/src/framework/Object.cpp
 
@@ -99,8 +102,6 @@ target_link_libraries(${LIGHT_YEARS_ENGINE_TARGET_NAME} PUBLIC sfml-window)
 target_link_libraries(${LIGHT_YEARS_ENGINE_TARGET_NAME} PUBLIC sfml-system)
 target_link_libraries(${LIGHT_YEARS_ENGINE_TARGET_NAME} PUBLIC sfml-audio)
 
-
-
 function(CopyLibToTarget LIB_NAME TARGET_NAME)
 	add_custom_command(TARGET ${TARGET_NAME}
 		POST_BUILD
@@ -110,6 +111,13 @@ function(CopyLibToTarget LIB_NAME TARGET_NAME)
 		$<TARGET_FILE_DIR:${TARGET_NAME}>
 	)
 endfunction()
+
+add_custom_command(
+    TARGET ${LIGHT_YEARS_ENGINE_TARGET_NAME}
+    POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy
+    ${FETCHCONTENT_BASE_DIR}/sfml-src/extlibs/bin/x64/openal32.dll $<TARGET_FILE_DIR:${LIGHT_YEARS_ENGINE_TARGET_NAME}>
+)
 
 CopyLibToTarget(sfml-graphics ${LIGHT_YEARS_ENGINE_TARGET_NAME})
 CopyLibToTarget(sfml-window ${LIGHT_YEARS_ENGINE_TARGET_NAME})

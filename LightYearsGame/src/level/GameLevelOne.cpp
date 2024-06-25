@@ -122,6 +122,8 @@ namespace ly
 	void GameLevelOne::InitGameStages()
 	{
 
+		AddStage(shared<ChaosStage>{new ChaosStage{ this }});
+
 
 		AddStage(shared<WaitStage>{new WaitStage{ this, 2.f }});
 		AddStage(shared<VanguardStage>{new VanguardStage{ this }});
