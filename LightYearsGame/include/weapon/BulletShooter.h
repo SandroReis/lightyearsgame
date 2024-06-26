@@ -23,7 +23,6 @@ namespace ly
 
 		sf::Vector2f mLocalPositionOffset;
 		float mLocalRotationOffset;
-
 		std::string mBulletTexturePath;
 	};
 }

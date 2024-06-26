@@ -8,13 +8,13 @@ namespace ly
 		mSpeed{ 100.f },
 		mBaseSpeed{ 100.f },
 		mSwitchDistanceToEdge{ 100.f },
-		mBaseShooterLeft{ this, 1.f, {50.f, -50.f} },
-		mBaseShooterRight{ this, 1.f, {50.f, 50.f} },
-		mThreeWayShooter{ this, 4.f, {100.f, 0.f} },
-		mFrontWiperLeft{ this, 5.f, {80.f, -100} },
-		mFrontWiperRight{ this, 5.f, {80.f, 100} },
-		mFinalStageShooterLeft{ this, 0.3f, {50.f, -150.f} },
-		mFinalStageShooterRight{ this, 0.3f, {50.f, 150.f} },
+		mBaseShooterLeft{ this, .8f, {50.f, -50.f} },
+		mBaseShooterRight{ this, .8f, {50.f, 50.f} },
+		mThreeWayShooter{ this, 3.f, {100.f, 0.f} },
+		mFrontWiperLeft{ this, 4.f, {80.f, -100} },
+		mFrontWiperRight{ this, 4.f, {80.f, 100} },
+		mFinalStageShooterLeft{ this, 0.25f, {50.f, -150.f} },
+		mFinalStageShooterRight{ this, 0.25f, {50.f, 150.f} },
 		mStage{ 1 }
 	{
 		SetActorRotation(90.f);
@@ -41,7 +41,7 @@ namespace ly
 	{
 		EnemySpaceship::BeginPlay();
 		HealthComponent& healthComp = GetHealthComp();
-		healthComp.SetInitialHealth(3000.f, 3000.f);
+		healthComp.SetInitialHealth(5000.f, 5000.f);
 		healthComp.onHealthChange.BindAction(GetWeakRef(), &Boss::HealthChanged);
 		//SetStage(4);
 	}

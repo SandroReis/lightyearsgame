@@ -16,10 +16,13 @@ namespace ly
 
 		virtual void IncrementLevel(int amt = 1) override;
 		virtual void SetCurrentLevel(int level) override;
+		virtual bool IsOnCooldown() override;
+		std::string& GetBulletSound() { return mBulletSoundPath; };
 
 
 	private:
 		virtual void ShootImpl() override;
+		std::string mBulletSoundPath;
 
 
 		float mWidth;

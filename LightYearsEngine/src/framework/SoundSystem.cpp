@@ -17,7 +17,7 @@ namespace ly
 	void SoundSystem::PlayMusic(std::string musicPath)
 	{
 		if (!mCurrentMusic.openFromFile(mRootDirectory + musicPath))
-			return; // error
+			return;
 
 		mCurrentMusic.setVolume(mMusicVol);
 		mCurrentMusic.setLoop(true);
@@ -58,8 +58,35 @@ namespace ly
 		}
 		mCurrentMusic.setVolume(mMusicVol);
 	}
+
+
+	void SoundSystem::PlaySound(const std::string& soundPath)
+	{
+		if (mSoundBuffers.find(soundPath) == mSoundBuffers.end())
+		{
+			sf::SoundBuffer buffer;
+			if (!buffer.loadFromFile(mRootDirectory + soundPath))
+				return; // error
+
+			mSoundBuffers[soundPath] = buffer;
+			mCurrentSound.setBuffer(mSoundBuffers[soundPath]);
+
+		}
+
+		mCurrentSound.setVolume(mMusicVol / 2.f);
+		mCurrentSound.play();
+
+		mSounds.push_back(mCurrentSound);
+	}
+	void SoundSystem::RemoveStoppedSounds()
+	{
+		mSounds.remove_if([](const sf::Sound& s) { return s.getStatus() == sf::Sound::Stopped; });
+	}
+
+
 	SoundSystem::SoundSystem()
 		: mCurrentMusic{},
+		mCurrentSound{},
 		mMusicVol{ 10.f }
 	{
 	}

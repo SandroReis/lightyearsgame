@@ -8,10 +8,10 @@ namespace ly
 {
 	UFOStage::UFOStage(World* world)
 		: GameStage{ world },
-		mSpawnInterval{ 3.f },
-		mSpawnAmt{ 15 },
+		mSpawnInterval{ 1.f },
+		mSpawnAmt{ 35 },
 		mCurrentSpawnAmt{ 0 },
-		mUFOSpeed{ 200.f }
+		mUFOSpeed{ 220.f }
 	{
 
 	}

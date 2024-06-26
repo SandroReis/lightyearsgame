@@ -45,6 +45,7 @@ namespace ly
 		mGameplayHUD.lock()->onQuitBtnClicked.BindAction(GetWeakRef(), &GameLevelOne::QuitGame);
 		mGameplayHUD.lock()->onRestartBtnClicked.BindAction(GetWeakRef(), &GameLevelOne::RestartGame);
 		SoundSystem::Get().PlayMusic("SpaceShooterRedux/sounds/music/outer_space_1.ogg");
+		SoundSystem::Get().SetMusicVolume(2.f);
 	}
 
 	void GameLevelOne::PlayerSpaceShipDestroyed(Actor* destoryedPlayerSpaceship)
@@ -123,7 +124,6 @@ namespace ly
 
 	void GameLevelOne::InitGameStages()
 	{
-
 
 		AddStage(shared<WaitStage>{new WaitStage{ this, 2.f }});
 		AddStage(shared<VanguardStage>{new VanguardStage{ this }});

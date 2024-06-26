@@ -45,6 +45,7 @@ namespace ly
 		mQuitButton.onButtonClicked.BindAction(GetWeakRef(), &MainMenuHUD::QuitButtonClicked);
 
 		SoundSystem::Get().PlayMusic("SpaceShooterRedux/sounds/music/CrashedShip.ogg");
+
 	}
 	void MainMenuHUD::StartButtonClicked()
 	{

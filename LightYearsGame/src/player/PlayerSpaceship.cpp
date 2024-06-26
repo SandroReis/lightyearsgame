@@ -1,4 +1,5 @@
 #include "framework/MathUtility.h"
+#include "framework/SoundSystem.h"
 #include "player/PlayerSpaceship.h"
 #include "weapon/BulletShooter.h"
 #include "weapon/FrontWiper.h"
@@ -11,7 +12,7 @@ namespace ly
 		: Spaceship{ owningWorld, path },
 		mMoveInput{},
 		mSpeed{ 200.f },
-		mShooter{ new BulletShooter {this, .5f, {50.f, 0.f}} },
+		mShooter{ new BulletShooter {this, .4f, {50.f, 0.f}} },
 		mInvulnerableTime{ 2.f },
 		mIsInvulnerable{ true },
 		mInvulnerableFlashInterval{ 0.5f },
@@ -44,8 +45,13 @@ namespace ly
 	{
 		if (mShooter)
 		{
-			mShooter->Shoot();
+			if (mShooter->CanShoot() && !mShooter->IsOnCooldown())
+			{
+				SoundSystem::Get().PlaySound(mShooter->GetBulletSound());
+				mShooter->Shoot();
+			}
 		}
+
 	}
 	void PlayerSpaceship::ApplyDamage(float amt)
 	{

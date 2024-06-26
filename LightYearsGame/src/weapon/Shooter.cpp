@@ -1,3 +1,4 @@
+#include "framework/SoundSystem.h"
 #include "weapon/Shooter.h"
 
 namespace ly
@@ -18,11 +19,12 @@ namespace ly
 	{
 		mCurrentLevel = level;
 	}
-	Shooter::Shooter(Actor* owner)
+	Shooter::Shooter(Actor* owner, const std::string& bulletSoundPath)
 		: mOwner{ owner },
 		mCurrentLevel{ 1 },
-		mMaxLevel{ 4 }
+		mMaxLevel{ 4 },
+		mBulletSoundPath{}
 	{
-
+		SetBulletSound(bulletSoundPath);
 	}
 }

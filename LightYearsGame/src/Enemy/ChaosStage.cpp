@@ -11,8 +11,8 @@ namespace ly
 {
 	ChaosStage::ChaosStage(World* world)
 		: GameStage{ world },
-		mSpawnInterval{ 4.f },
-		mMinSpawnInterval{ 0.8f },
+		mSpawnInterval{ 3.f },
+		mMinSpawnInterval{ 0.4f },
 		mSpawnIntervalDecrement{ 0.5f },
 		mSpawnIntervalDecrementInterval{ 5.f },
 		mStageDuration{ 60.f }

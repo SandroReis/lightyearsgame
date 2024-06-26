@@ -17,11 +17,14 @@ namespace ly
 		BulletShooter mTopLevelShooterLeft;
 		BulletShooter mTopLevelShooterRight;
 
+		virtual bool IsOnCooldown() override;
+		std::string& GetBulletSound() { return mBulletSoundPath; };
 
 		virtual void IncrementLevel(int amt) override;
 		virtual void SetCurrentLevel(int level) override;
 
 	private:
+		std::string mBulletSoundPath;
 		virtual void ShootImpl() override;
 	};
 }

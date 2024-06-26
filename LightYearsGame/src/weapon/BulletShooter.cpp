@@ -1,4 +1,5 @@
 #include "framework/Core.h"
+#include "framework/SoundSystem.h"
 #include "framework/World.h"
 #include "weapon/Bullet.h"
 #include "weapon/BulletShooter.h"
@@ -38,6 +39,7 @@ namespace ly
 		sf::Vector2f ownerRightDir = GetOwner()->GetActorRightDirection();
 
 		mCooldownClock.restart();
+
 		weak<Bullet> newBullet = GetOwner()->GetWorld()->SpawnActor<Bullet>(GetOwner(), mBulletTexturePath);
 		newBullet.lock()->SetActorLocation(GetOwner()->GetActorLocation() + ownerForwardDir * mLocalPositionOffset.x + ownerRightDir * mLocalPositionOffset.y);
 		newBullet.lock()->SetActorRotation(GetOwner()->GetActorRotation() + mLocalRotationOffset);

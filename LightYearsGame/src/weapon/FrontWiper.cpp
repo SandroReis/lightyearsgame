@@ -1,3 +1,4 @@
+#include "framework/SoundSystem.h"
 #include "weapon/FrontWiper.h"
 
 namespace ly
@@ -10,7 +11,8 @@ namespace ly
 		mShooter3{ owner, cooldownTime, {localOffset.x, localOffset.y + mWidth / 6.f}, 0.f,"SpaceShooterRedux/PNG/Lasers/laserBlue07.png" },
 		mShooter4{ owner, cooldownTime, {localOffset.x, localOffset.y + mWidth / 2.f}, 0.f, "SpaceShooterRedux/PNG/Lasers/laserGreen11.png" },
 		mShooter5{ owner, cooldownTime / 1.5f, {localOffset.x, localOffset.y + mWidth / 1.5f}, 15.f, "SpaceShooterRedux/PNG/Lasers/laserGreen11.png" },
-		mShooter6{ owner, cooldownTime / 1.5f, {localOffset.x, localOffset.y - mWidth / 1.5f}, -15.f, "SpaceShooterRedux/PNG/Lasers/laserGreen11.png" }
+		mShooter6{ owner, cooldownTime / 1.5f, {localOffset.x, localOffset.y - mWidth / 1.5f}, -15.f, "SpaceShooterRedux/PNG/Lasers/laserGreen11.png" },
+		mBulletSoundPath{ "SpaceShooterRedux/sounds/sound_effects/NovaShot.ogg" }
 	{
 	}
 	void FrontWiper::IncrementLevel(int amt)
@@ -34,6 +36,10 @@ namespace ly
 		mShooter5.SetCurrentLevel(level);
 		mShooter6.SetCurrentLevel(level);
 	}
+	bool FrontWiper::IsOnCooldown()
+	{
+		return mShooter1.IsOnCooldown();
+	}
 	void FrontWiper::ShootImpl()
 	{
 		mShooter1.Shoot();
@@ -46,5 +52,6 @@ namespace ly
 			mShooter5.Shoot();
 			mShooter6.Shoot();
 		}
+
 	}
 }
